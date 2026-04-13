@@ -20,7 +20,7 @@ model User {
 }
 
 model Account {
-  accountNumber Int @id @map("account_number")
+  accountNumber String @db.VarChar(10) @id @map("account_number")
   userId String @map("user_id") @db.Uuid
   balance Decimal @default(0) @db.Money
   lowerLimit Decimal @default(10000) @map("lower_limit") @db.Money
@@ -43,9 +43,9 @@ enum TransactionType {
 model Transaction {
   id String @id @default(uuid())
   transactionType TransactionType @map("transaction_type")
-  accountNumber Int @map("account_number")
+  accountNumber String @db.VarChar(10) @map("account_number")
   amount Decimal @db.Money
-  transferTo Int? @map("transfer_to")
+  transferTo String? @db.VarChar(10) @map("transfer_to")
 
   account Account @relation("accountRelation", fields: [accountNumber], references: [accountNumber])
   accountTo Account? @relation("accountToRelation", fields: [transferTo], references: [accountNumber])
