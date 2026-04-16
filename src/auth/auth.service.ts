@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { RegisterDto } from './dto/register.dto';
-import { UsersRepository } from 'src/users/users.repository';
+import { UsersRepository } from 'src/modules/users/users.repository';
 import { ERROR_MESSAGES } from 'src/common/constants/error-messages';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';

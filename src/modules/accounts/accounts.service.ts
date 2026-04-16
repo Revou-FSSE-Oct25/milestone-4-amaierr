@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
 import { AccountsRepository } from './accounts.repository';
-import { UsersRepository } from 'src/users/users.repository';
+import { UsersRepository } from 'src/modules/users/users.repository';
 import { ERROR_MESSAGES } from 'src/common/constants/error-messages';
 
 @Injectable()

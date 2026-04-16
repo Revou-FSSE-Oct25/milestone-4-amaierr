@@ -1,7 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request } from '@nestjs/common';
 import { RegisterDto } from './dto/register.dto';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
+import { Public } from './decorator/public.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -9,13 +10,20 @@ export class AuthController {
         private readonly authService: AuthService
     ){}
     
+    @Public()
     @Post('/register')
     register(@Body() registerDto: RegisterDto) {
       return this.authService.register(registerDto);
     }
 
+    @Public()
     @Post('/login')
     login(@Body() loginDto: LoginDto){
       return this.authService.login(loginDto);
+    }
+
+    @Get('profile')
+    getProfile(@Request() req: any) {
+      return req.user;
     }
 }
