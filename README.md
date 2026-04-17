@@ -74,7 +74,7 @@ src/
 
 ---
 
-## 🧩 Database Schema (Simplified)
+## 🧩 Database Schema
 
 - **User**
   - id
