@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { RegisterDto } from './dto/register.dto';
 import { UsersRepository } from 'src/modules/users/users.repository';
 import { ERROR_MESSAGES } from 'src/common/constants/error-messages';
@@ -17,10 +17,10 @@ export class AuthService {
         const existingUser = await this.usersRepository.getUserByEmail(registerDto.email)
         
         if(existingUser){
-            throw new NotFoundException(ERROR_MESSAGES.USER.ALREADY_EXISTS)
+            throw new ConflictException(ERROR_MESSAGES.USER.ALREADY_EXISTS)
         }
         
-        const hashedPassword = await bcrypt.hash(registerDto.password, 10);
+        const hashedPassword = await bcrypt.hash(registerDto.password, 10)
         registerDto.password = hashedPassword
 
         return this.usersRepository.createNewUser(registerDto)

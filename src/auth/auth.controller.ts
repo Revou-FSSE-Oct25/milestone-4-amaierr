@@ -21,9 +21,4 @@ export class AuthController {
     login(@Body() loginDto: LoginDto){
       return this.authService.login(loginDto);
     }
-
-    @Get('profile')
-    getProfile(@Request() req: any) {
-      return req.user;
-    }
 }
