@@ -5,7 +5,6 @@ import { ERROR_MESSAGES } from 'src/common/constants/error-messages';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
-import { CONSTANT } from 'src/common/constants/constant-variable';
 
 @Injectable()
 export class AuthService {
@@ -14,15 +13,7 @@ export class AuthService {
         private jwtService: JwtService
     ) {}
 
-    async register(registerDto: RegisterDto){
-        // Validate role
-        const roles = CONSTANT.ROLE
-        type Role = typeof roles[keyof typeof roles]
-
-        if(!Object.values(roles).includes(registerDto.role as Role)){
-            throw new NotAcceptableException(ERROR_MESSAGES.AUTH.ROLES_NOT_VALID)
-        }
-        
+    async register(registerDto: RegisterDto){        
         // Validate if user exist
         const existingUser = await this.usersRepository.getUserByEmail(registerDto.email)
         

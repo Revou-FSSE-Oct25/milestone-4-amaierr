@@ -1,7 +1,6 @@
 export const ERROR_MESSAGES = {
   AUTH: {
     UNAUTHORIZED: 'Invalid credentials provided',
-    ROLES_NOT_VALID: 'Roles must be Admin / Customer',
     ROLES_FORBIDDEN: 'Require one of these roles: ',
     MISSING_ROLE: 'User context is missing role information',
   },
@@ -13,6 +12,7 @@ export const ERROR_MESSAGES = {
   ACCOUNT: {
     NOT_FOUND: 'Account Number not found : ',
     DELETE_FORBIDDEN: "Account can only be deleted by related user or admin",
+    BALANCE_NOT_ZERO: "To delete account balance must be at 0"
   },
   TRANSACTION: {
     INSUFFICIENT_BALANCE: 'Your balance is not sufficient for this transaction',

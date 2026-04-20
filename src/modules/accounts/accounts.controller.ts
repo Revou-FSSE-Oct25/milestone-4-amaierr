@@ -5,7 +5,7 @@ import { UpdateAccountDto } from './dto/update-account.dto';
 import { User } from 'src/auth/decorator/user.decorator';
 import { LoggedInUserDto } from '../users/dto/logged-in-user.dto';
 import { Roles } from 'src/auth/decorator/roles.decorator';
-import { CONSTANT } from 'src/common/constants/constant-variable';
+import { Role } from 'generated/prisma/enums';
 
 @Controller('accounts')
 export class AccountsController {
@@ -26,13 +26,13 @@ export class AccountsController {
     return this.accountsService.findAllByUserId(user.id);
   }
   
-  @Roles(CONSTANT.ROLE.ADMIN)
+  @Roles(Role.Admin)
   @Get('/all-accounts')
   findAll() {
     return this.accountsService.findAll();
   }
 
-  @Roles(CONSTANT.ROLE.ADMIN)
+  @Roles(Role.Admin)
   @Patch()
   update(@Body() updateAccountDto: UpdateAccountDto) {
     return this.accountsService.update(updateAccountDto);

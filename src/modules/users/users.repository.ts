@@ -27,7 +27,6 @@ export class UsersRepository {
                 email: registerDto.email,
                 name: registerDto.name,
                 password: registerDto.password,
-                role: registerDto.role
             }
         })
     }

@@ -2,12 +2,11 @@ import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/commo
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { TransactionsRepository } from './transaction.repository';
-import { TransactionType } from 'generated/prisma/enums';
+import { Role, TransactionType } from 'generated/prisma/enums';
 import { AccountsRepository } from 'src/modules/accounts/accounts.repository';
 import { ERROR_MESSAGES } from 'src/common/constants/error-messages';
 import { TransferTransactionDto } from './dto/transfer-transaction.dto';
 import { LoggedInUserDto } from '../users/dto/logged-in-user.dto';
-import { CONSTANT } from 'src/common/constants/constant-variable';
 
 @Injectable()
 export class TransactionsService {
@@ -117,7 +116,7 @@ export class TransactionsService {
     }
 
     // Validate account belongs to user
-    if(!(user.id === account?.userId) || user.role === CONSTANT.ROLE.ADMIN){
+    if(!(user.id === account?.userId) || user.role === Role.Admin){
       throw new ForbiddenException(ERROR_MESSAGES.TRANSACTION.HISTORY_FORBIDDEN)
     }
 

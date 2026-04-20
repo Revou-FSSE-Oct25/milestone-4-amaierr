@@ -1,10 +1,10 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotAcceptableException, NotFoundException } from '@nestjs/common';
 import { UpdateAccountDto } from './dto/update-account.dto';
 import { AccountsRepository } from './accounts.repository';
 import { UsersRepository } from 'src/modules/users/users.repository';
 import { ERROR_MESSAGES } from 'src/common/constants/error-messages';
 import { LoggedInUserDto } from '../users/dto/logged-in-user.dto';
-import { CONSTANT } from 'src/common/constants/constant-variable';
+import { Role } from 'generated/prisma/enums';
 
 @Injectable()
 export class AccountsService {
@@ -79,8 +79,12 @@ export class AccountsService {
       throw new NotFoundException(ERROR_MESSAGES.ACCOUNT.NOT_FOUND + accountNumber)
     }
 
-    if(!(account.userId === user.id) || user.role === CONSTANT.ROLE.ADMIN){
+    if(!(account.userId === user.id) || user.role === Role.Admin){
       throw new ForbiddenException(ERROR_MESSAGES.ACCOUNT.DELETE_FORBIDDEN)
+    }
+
+    if(account.balance.greaterThan(0)){
+      throw new NotAcceptableException(ERROR_MESSAGES.ACCOUNT.BALANCE_NOT_ZERO)
     }
 
     return this.accountsRepository.deleteAccount(accountNumber)

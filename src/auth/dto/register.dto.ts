@@ -13,7 +13,4 @@ export class RegisterDto {
     @IsString()
     @IsNotEmpty()
     password: string
-
-    @IsString()
-    role: Role
 }
