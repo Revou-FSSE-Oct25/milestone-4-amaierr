@@ -1,8 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateAccountDto } from './create-account.dto';
 import { IsNotEmpty, IsNumber, IsPositive, IsString, MaxLength, MinLength } from 'class-validator';
 
-export class UpdateAccountDto extends PartialType(CreateAccountDto) {
+export class UpdateAccountDto {
     @IsNotEmpty()
     @IsString()
     @MinLength(10)
